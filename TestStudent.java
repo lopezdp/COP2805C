@@ -24,6 +24,8 @@ public class TestStudent {
         StudentList studentList = new StudentList();
         
         studentList.readStudents();
+        studentList.mergeSortStudents(studentList.students);
+        // studentList.mergeSortStudents();
         
         
     }
