@@ -21,6 +21,9 @@ public class StudentList {
     // An array list of students
     protected ArrayList<Student> students = new ArrayList<>();
     
+    // A Merge Sorted Array
+    protected ArrayList<Student> sortedStudents = new ArrayList<>();
+    
     // method that prompts the user for an input file name
     // and it reads the contents of the input file into students
     // Expected File Input:
@@ -112,6 +115,8 @@ public class StudentList {
         if(n > -1){
             List<Student> sList1 = students.subList(0, n);
             List<Student> sList2 = students.subList(n/2 + 1, n+1);
+            
+            
 
             // Recursively divide the lists into 2 halves until it 
             // cannot be divided any further
@@ -126,28 +131,37 @@ public class StudentList {
                     */
             
             while(sList1.size() > 0 && sList2.size() > 0){
-                if(sList1.get(0).getAverage() > sList2.get(0).getAverage()){
-                    
-                }
+                if(sList1.size() == 1){
+                    sortedStudents.add(sList1.get(0));
+                    sList1.remove(sList1.get(0));
+                } else if(sList2.size() == 1){
+                    sortedStudents.add(sList2.get(0));
+                    sList2.remove(sList2.get(0));
+                } else{
+                    if(sList1.get(0).getAverage() > sList2.get(0).getAverage()){
+                    sortedStudents.add(sList2.get(0));
+                    sList2.remove(sList2.get(0));
+                    } else{
+                        sortedStudents.add(sList1.get(0));
+                        sList1.remove(sList1.get(0));
+                    } 
+                }        
             }
             
+            while(sList1.size() > 0){
+                sortedStudents.add(sList1.get(0));
+                sList1.remove(sList1.get(0));
+            }
             
-            
-            
-            
+            while(sList2.size() > 0){
+                sortedStudents.add(sList2.get(0));
+                sList1.remove(sList2.get(0));
+            }    
         }
         else{
             System.out.println("MergeSortingComplete");
         }
-        
-        
-        
-  
     }
-    
-    
-        
- 
     
     // prompt the user for an output file name and write contents of students
     // to the output file in the following format:
@@ -155,6 +169,5 @@ public class StudentList {
     // Dave    100.0    100.0    100.0    100.0    Passing
     public void writeStudents(){
         
-    }
-    
+    }   
 }
